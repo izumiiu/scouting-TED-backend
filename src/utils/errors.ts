@@ -8,6 +8,6 @@ export class AppError extends Error {
   }
 }
 export const badRequest = (message: string) =>
-  new AppError(400, 'INVALID_INPUT', message);
+  new AppError(400, "INVALID_INPUT", message);
 export const conflict = (message: string) =>
-  new AppError(409, 'REVISION_CONFLICT', message);
+  new AppError(409, "REVISION_CONFLICT", message);
