@@ -7,7 +7,7 @@ const pdf = "application/pdf",
 export const upload = multer({
   storage: multer.memoryStorage(),
   limits: {
-    fileSize: 10 * 1024 * 1024,
+    fileSize: 20 * 1024 * 1024,
     files: 1,
     fields: 3,
     fieldSize: 3000,

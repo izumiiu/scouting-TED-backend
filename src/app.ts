@@ -62,7 +62,7 @@ export function createApp(config: Config) {
         safe = new AppError(
           400,
           "INVALID_FILE",
-          "ไฟล์ต้องไม่เกิน 10 MB และอัปโหลดได้ครั้งละหนึ่งไฟล์",
+          "ไฟล์ต้องไม่เกิน 20 MB และอัปโหลดได้ครั้งละหนึ่งไฟล์",
         );
       if (error instanceof SyntaxError)
         safe = new AppError(400, "INVALID_INPUT", "รูปแบบ JSON ไม่ถูกต้อง");

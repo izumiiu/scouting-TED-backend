@@ -51,6 +51,9 @@ export interface TedResult {
   missingInformation: {
     scope: "TED" | "TED_IDEA" | "TED_POC" | "TED_POC_FUNDING" | "DEVELOPMENT";
     question: string;
+    /** Optional only for results stored before ted-document-3. */
+    topic?: string;
+    impact?: string;
   }[];
 }
 export type RunStatus =

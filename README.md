@@ -25,7 +25,7 @@ Express + TypeScript + MongoDB Atlas + Groq ระบบ TED แยกจาก 
 
 รับไฟล์ → เก็บต้นฉบับใน GridFS + สร้างคิวใน transaction → อ่านหัวข้อ/ตารางใน process ต่างหาก → แยกคำแนะนำจากคำตอบ → เลือกคำตอบให้ครอบคลุมหัวข้อ → เรียก AI หนึ่งครั้ง → ตรวจ JSON/แหล่งอ้างอิง → เก็บผลและรอเจ้าหน้าที่
 
-- PDF ที่เลือกข้อความได้ / DOCX ครั้งละไฟล์ ไม่เกิน 10 MB; PDF ไม่เกิน 100 หน้า; ข้อความไม่เกิน 150,000 ตัวอักษร / 2,500 ส่วน
+- PDF ที่เลือกข้อความได้ / DOCX ครั้งละไฟล์ ไม่เกิน 20 MB; PDF ไม่เกิน 100 หน้า; ข้อความไม่เกิน 150,000 ตัวอักษร / 2,500 ส่วน
 - ตัวอ่านมี timeout 25 วินาทีและ V8 heap limit 192 MB ตรวจขนาด ZIP ภายใน DOCX ก่อนอ่าน ไม่มีการรัน macro หรือแปลงเป็น HTML
 - ไม่มี OCR/การอ่านภาพ ตารางซับซ้อนหรือส่วนหัวท้ายอาจอ่านได้ไม่ครบ เจ้าหน้าที่ต้องเทียบต้นฉบับ
 - ตัดข้อความเป็นส่วนละไม่เกิน 600 ตัวอักษร แล้วค้นด้วยคำสำคัญไทย/อังกฤษ 9 หัวข้อ ใช้ข้อความและข้อมูลเพิ่มเติมรวมไม่เกิน 5,000 ตัวอักษร เลือกคำตอบสลับตามหัวข้อ แทนการหยุดที่ 14 ส่วนสั้น ๆ; จำกัดไม่เกิน 40 ส่วนเอกสาร และขนาด JSON แหล่งข้อมูลไม่เกินประมาณ 7,000 ตัวอักษร ร่วมกับข้อมูลเจ้าหน้าที่
@@ -114,3 +114,11 @@ Production ควรแยกชื่อฐาน TED เพิ่มจาก 
 Worker อยู่ process เดียวกับ Web Service หากโฮสต์หยุด/หลับ งานจะรอจนบริการทำงานอีกครั้ง คิวเก็บใน MongoDB และงานที่หยุดกลางทางต้องให้เจ้าหน้าที่ลองใหม่ ไม่รับรองการทำงานเบื้องหลังตลอดเวลาในแผน free ที่มี sleep
 
 รุ่นนี้เหมาะกับการทดลองในทีมขนาดเล็ก ก่อนใช้จริงวงกว้างต้องเพิ่ม pagination/การจัดการผู้ใช้/backup-retention/ประเมินคุณภาพด้วยเอกสารที่ผู้เชี่ยวชาญตรวจแล้ว และพิจารณาแยก worker/storage ตามปริมาณงาน
+
+## Detailed analysis follow-ups (ted-document-3)
+
+New analyses include a Thai topic, a specific question, and the scope-specific effect on assessment. Historical results remain readable without inventing missing explanations; analyze again to obtain the new details. No score, eligibility gate, or grant approval is added.
+
+Reading/selection coverage is distinct from missing project evidence. A topic not selected for AI or not extracted does not prove absence from the original document. Contribution verification remains separate from IDEA/POC classification.
+
+`npm test` uses one Vitest thread worker to avoid native fork-worker crashes observed on Windows. Tests use an isolated in-memory MongoDB and mocked AI.

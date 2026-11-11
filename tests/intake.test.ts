@@ -68,7 +68,7 @@ const raw = (sources: SourceUnit[]) => ({
     },
   },
   missingInformation: [
-    { scope: "TED_POC", question: "ขอหลักฐานผลทดลองกับผู้ใช้จริง" },
+    { scope: "TED_POC", topic: "ผลทดลองกับผู้ใช้", question: "ขอหลักฐานผลทดลองกับผู้ใช้จริง", impact: "ยังยืนยันผลทดลองตลาดไม่ได้" },
   ],
 });
 const analyze: Analyze = vi.fn(async (sources) => ({
